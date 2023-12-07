@@ -2,8 +2,23 @@ import React, { FC, CSSProperties } from 'react';
 import classNames from 'classnames';
 import { SCALE_FACTOR } from '../model/Coordinates';
 import './Sprite.css';
+import RedPacmanImage from '../resources/arcade_pacman_sprites-red.png'
+import BluePacmanImage from '../resources/arcade_pacman_sprites-blue.png'
+import PinkPacmanImage from '../resources/arcade_pacman_sprites-pink.png'
+import GreenPacmanImage from '../resources/arcade_pacman_sprites-green.png'
+import YellowPacmanImage from '../resources/arcade_pacman_sprites-yellow.png'
+import OrangePacmanImage from '../resources/arcade_pacman_sprites-orange.png'
 
 const scale = `scale(${SCALE_FACTOR})`;
+
+const images = {
+  red: RedPacmanImage,
+  blue: BluePacmanImage,
+  pink: PinkPacmanImage,
+  green: GreenPacmanImage,
+  orange: OrangePacmanImage,
+  yellow: YellowPacmanImage,
+}
 
 export const Sprite: FC<{
   name: string;
@@ -22,6 +37,7 @@ export const Sprite: FC<{
         top: `${y}px`,
         transform: scale,
         transformOrigin: 'top left',
+        backgroundImage: `url(${images.yellow})`,
       }}
     />
   );

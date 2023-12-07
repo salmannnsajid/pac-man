@@ -88,6 +88,7 @@ const eatPillLayerObject = (tile: TileCoordinates, game: Game) => {
 
 const eatPill = (tile: TileCoordinates, game: Game) => {
   game.score += BASIC_PILL_POINTS;
+  game.pillsEaten += 1;
 };
 
 const detectGhostCollisions = (game: Game) => {

@@ -1,4 +1,4 @@
-import MapData from '../mapData/pacman6.json';
+import MapData from "../mapData/pacman6.json";
 
 export type TileId = number;
 
@@ -18,15 +18,20 @@ interface Layer {
 }
 
 const getLayer = (layerName: string): Layer => {
-  const layer = MapData.layers.find(layer => layer.name === layerName);
+  let name = layerName;
+  if (layerName === "Pills") {
+    const randomNum = Math.floor(Math.random() * 11);
+    name = layerName + "-" + randomNum;
+  }
+  const layer = MapData.layers.find((layer) => layer.name === name);
   if (!layer) {
     throw new Error(`${layerName} layer not found`);
   }
   return layer;
 };
 
-const pillsLayer: Layer = getLayer('Pills');
-const waysLayer: Layer = getLayer('Ways');
+const pillsLayer: Layer = getLayer("Pills");
+const waysLayer: Layer = getLayer("Ways");
 
 export const MAZE_WIDTH_IN_TILES = pillsLayer.width;
 export const MAZE_HEIGHT_IN_TILES = pillsLayer.height;

@@ -1,6 +1,5 @@
 import { observer } from 'mobx-react-lite';
 import React, { FC, memo } from 'react';
-import { Box } from '../../../components/Box';
 import { Sprite } from '../../../components/Sprite';
 import {
   addCoordinatesAndVector,
@@ -9,7 +8,6 @@ import {
   SCREEN_TILE_CENTER_VECTOR,
   TileCoordinates,
 } from '../../../model/Coordinates';
-import { getPillHitBox } from '../../../model/detectCollisions';
 import {
   BASIC_PILL_ID,
   ENERGIZER_ID,
@@ -26,11 +24,6 @@ const BasicPillView: FC<{ position: ScreenCoordinates }> = ({ position }) => (
 const EnergizerView: FC<{ position: ScreenCoordinates }> = ({ position }) => (
   <Sprite x={position.x - 10} y={position.y - 10} name="energizer" />
 );
-
-export const BasicPillHitBox: FC = () => {
-  const rect = getPillHitBox({ x: 1, y: 3 }, BASIC_PILL_ID);
-  return <Box rect={rect} color="blue" />;
-};
 
 const PillView = observer<{ tile: TileCoordinates }>(
   ({ tile }: { tile: TileCoordinates }) => {

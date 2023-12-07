@@ -14,6 +14,7 @@ import { useStore } from "../../components/StoreContext";
 import { useKeyboardActions } from "./components/useKeyboardActions";
 import { VSpace } from "../../components/Spacer";
 import { useGameLoop } from "../../model/useGameLoop";
+import { GameWon } from "./components/GameWon";
 
 export const GamePage: React.FC = observer(() => {
   const store = useStore();
@@ -34,19 +35,21 @@ export const GamePage: React.FC = observer(() => {
         <Row justify="center">
           <Score />
         </Row>
-        <Row style={{ gap: "1rem" }}>
+        <Row style={{ gap: "1rem", justifyContent: "center" }}>
+          {!store.game.gameOver && !store.game.gameWon && (
+            <Button
+              size="large"
+              type="primary"
+              style={{ fontSize: "1rem", fontFamily: "Joystix" }}
+              onClick={() => (store.game.gamePaused = !store.game.gamePaused)}
+            >
+              {store.game.gamePaused ? "Start" : "Pause"}
+            </Button>
+          )}
           <Button
             size="large"
             type="primary"
-            style={{ fontSize: "1rem", fontFamily: "Joystix" }}
-            onClick={() => (store.game.gamePaused = !store.game.gamePaused)}
-          >
-            {store.game.gamePaused ? "Start" : "Pause"}
-          </Button>
-          <Button
-            size="large"
-            type="primary"
-            onClick={() => store.resetGame()}
+            onClick={() => window.location.reload()}
             style={{ fontSize: "1rem", fontFamily: "Joystix" }}
           >
             Restart
@@ -64,6 +67,7 @@ export const GamePage: React.FC = observer(() => {
           <PacManView />
           <GhostsGameView />
           <GameOver />
+          <GameWon />
         </Board>
         <VSpace size="large" />
         <Row justify="center">

@@ -1,11 +1,11 @@
-import { action, computed, observable } from 'mobx';
-import { Ghost } from './Ghost';
-import { makeGhosts, resetGhosts } from './makeGhosts';
-import { Maze } from './Maze';
-import { PacMan, resetPacMan } from './PacMan';
-import { MilliSeconds, PixelsPerFrame } from './Types';
-import { Store } from './Store';
-import { TimeoutTimer } from './TimeoutTimer';
+import { action, computed, observable } from "mobx";
+import { Ghost } from "./Ghost";
+import { makeGhosts, resetGhosts } from "./makeGhosts";
+import { Maze } from "./Maze";
+import { PacMan, resetPacMan } from "./PacMan";
+import { MilliSeconds, PixelsPerFrame } from "./Types";
+import { Store } from "./Store";
+import { TimeoutTimer } from "./TimeoutTimer";
 
 export const DEFAULT_SPEED = 2;
 
@@ -46,13 +46,16 @@ export class Game {
   score = 0;
 
   @observable
+  pillsEaten = 0;
+
+  @observable
   killedGhosts = 0;
 
   maze = new Maze();
 
   @action.bound
   revivePacMan() {
-    this.pacMan.send('REVIVED');
+    this.pacMan.send("REVIVED");
     this.timestamp = 0;
     resetPacMan(this.pacMan);
     resetGhosts(this.ghosts);
@@ -64,15 +67,20 @@ export class Game {
     return pacMan.dead && pacMan.extraLivesLeft === 0;
   }
 
+  @computed
+  get gameWon(): boolean {
+    return this.pillsEaten === 240;
+  }
+
   energizerTimer = new TimeoutTimer(ENERGIZER_DURATION, () => {
     this.handleEnergizerTimedOut();
   });
 
   @action
   handleEnergizerTimedOut() {
-    this.pacMan.send('ENERGIZER_TIMED_OUT');
+    this.pacMan.send("ENERGIZER_TIMED_OUT");
     for (const ghost of this.ghosts) {
-      ghost.send('ENERGIZER_TIMED_OUT');
+      ghost.send("ENERGIZER_TIMED_OUT");
     }
   }
 
