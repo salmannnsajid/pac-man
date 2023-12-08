@@ -12,10 +12,11 @@ export const DEFAULT_SPEED = 2;
 const ENERGIZER_DURATION: MilliSeconds = 5000;
 
 export class Game {
-  constructor(store: Store) {
+  constructor(store: Store, mazeId: number) {
     this.store = store;
     this.pacMan = new PacMan(this);
     this.ghosts = makeGhosts(this);
+    this.maze = new Maze(mazeId);
   }
 
   store: Store;
@@ -42,6 +43,8 @@ export class Game {
 
   pacMan: PacMan;
 
+  maze: Maze;
+
   @observable
   score = 0;
 
@@ -56,8 +59,6 @@ export class Game {
 
   @observable
   killedGhosts = 0;
-
-  maze = new Maze();
 
   @action.bound
   revivePacMan() {

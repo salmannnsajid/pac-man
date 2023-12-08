@@ -19,7 +19,7 @@ export const GridWithHoverCoordinates: FC<{
   ) => void; // eslint-disable-next-line @typescript-eslint/no-empty-function
 }> = ({ screenCoordinates, onClick }) => {
   const [coordinates, setCoordinates] = useState<TileCoordinates | null>(null);
-  const pillsMatrix = getPillsMatrix();
+  const pillsMatrix = getPillsMatrix(null);
   const { x, y } = screenCoordinates;
   return (
     <>

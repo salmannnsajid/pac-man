@@ -1,13 +1,13 @@
-import { observable, action } from 'mobx';
-import { Game } from './Game';
+import { observable, action } from "mobx";
+import { Game } from "./Game";
 
 export class Store {
   @observable
-  game: Game = new Game(this);
+  game: Game = new Game(this, 1);
 
   @action.bound
-  resetGame() {
-    this.game = new Game(this);
+  resetGame(num: number) {
+    this.game = new Game(this, num);
     this.game.readyGameForPlay();
   }
 }

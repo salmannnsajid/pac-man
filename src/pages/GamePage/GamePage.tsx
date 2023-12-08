@@ -19,11 +19,11 @@ import { GameWon } from "./components/GameWon";
 export const GamePage: React.FC = observer(() => {
   const store = useStore();
   useEffect(() => {
-    store.resetGame();
+    store.resetGame(1);
     return () => {
       store.game.gamePaused = true;
     };
-    // eslint-disable-next-line  react-hooks/exhaustive-deps
+    // eslint-disable-next-line
   }, []);
 
   useGameLoop();
@@ -41,7 +41,10 @@ export const GamePage: React.FC = observer(() => {
               size="large"
               type="primary"
               style={{ fontSize: "1rem", fontFamily: "Joystix" }}
-              onClick={() => (store.game.gamePaused = !store.game.gamePaused)}
+              onClick={(e) => {
+                store.game.gamePaused = !store.game.gamePaused;
+                e.currentTarget.blur();
+              }}
             >
               {store.game.gamePaused ? "Start" : "Pause"}
             </Button>
@@ -49,7 +52,11 @@ export const GamePage: React.FC = observer(() => {
           <Button
             size="large"
             type="primary"
-            onClick={() => window.location.reload()}
+            onClick={(e) => {
+              const randomNum = Math.floor(Math.random() * 11);
+              store.resetGame(randomNum);
+              e.currentTarget.blur();
+            }}
             style={{ fontSize: "1rem", fontFamily: "Joystix" }}
           >
             Restart

@@ -17,11 +17,10 @@ interface Layer {
   height: number;
 }
 
-const getLayer = (layerName: string): Layer => {
+const getLayer = (layerName: string, num: any): Layer => {
   let name = layerName;
   if (layerName === "Pills") {
-    const randomNum = Math.floor(Math.random() * 11);
-    name = layerName + "-" + randomNum;
+    name = layerName + "-" + num;
   }
   const layer = MapData.layers.find((layer) => layer.name === name);
   if (!layer) {
@@ -30,8 +29,8 @@ const getLayer = (layerName: string): Layer => {
   return layer;
 };
 
-const pillsLayer: Layer = getLayer("Pills");
-const waysLayer: Layer = getLayer("Ways");
+const pillsLayer: Layer = getLayer("Pills", 1);
+const waysLayer: Layer = getLayer("Ways", null);
 
 export const MAZE_WIDTH_IN_TILES = pillsLayer.width;
 export const MAZE_HEIGHT_IN_TILES = pillsLayer.height;
@@ -50,6 +49,8 @@ export const getTileMatrix = (data: TileId[]): TileMatrix => {
   return tileMatrix;
 };
 
-export const getPillsMatrix = (): TileMatrix => getTileMatrix(pillsLayer.data);
-
+export const getPillsMatrix = (num: any): TileMatrix => {
+  let pillsLayerData = getLayer("Pills", num !== null ? num : 1);
+  return getTileMatrix(pillsLayerData.data);
+};
 export const waysMatrix: TileMatrix = getTileMatrix(waysLayer.data);
