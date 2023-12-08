@@ -52,6 +52,9 @@ export class Game {
   energizerEaten = 0;
 
   @observable
+  ghostsEaten = 0;
+
+  @observable
   killedGhosts = 0;
 
   maze = new Maze();

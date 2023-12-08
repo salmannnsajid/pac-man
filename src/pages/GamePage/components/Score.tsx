@@ -6,6 +6,7 @@ import classNames from 'classnames';
 
 export const Score = observer<{ className?: string }>(({ className }) => {
   const store = useGame();
+  // console.log(game?.ghostsEaten,'store?.game?.ghostsEaten');
   return (
     <div className={classNames('Score', className)}>
       <span>Score</span>

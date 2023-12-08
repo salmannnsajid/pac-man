@@ -61,6 +61,7 @@ export class Ghost {
   @action.bound
   onDead() {
     this.game.killedGhosts++;
+    this.game.ghostsEaten += 1;
     this.game.score += KILL_GHOST_SCORE[this.game.killedGhosts];
     this.deadWaitingTimeInBoxLeft = DEAD_WAITING_IN_BOX_DURATION;
   }
