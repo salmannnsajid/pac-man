@@ -49,6 +49,9 @@ export class Game {
   pillsEaten = 0;
 
   @observable
+  energizerEaten = 0;
+
+  @observable
   killedGhosts = 0;
 
   maze = new Maze();
@@ -69,7 +72,7 @@ export class Game {
 
   @computed
   get gameWon(): boolean {
-    return this.pillsEaten === 240;
+    return this.pillsEaten === 240 && this.energizerEaten === 4;
   }
 
   energizerTimer = new TimeoutTimer(ENERGIZER_DURATION, () => {
