@@ -40,7 +40,7 @@ export const GamePage: React.FC = observer(() => {
             <Button
               size="large"
               type="primary"
-              style={{ fontSize: "1rem", fontFamily: "Joystix" }}
+              style={{ fontSize: "1rem" }}
               onClick={(e) => {
                 store.game.gamePaused = !store.game.gamePaused;
                 e.currentTarget.blur();
@@ -57,7 +57,7 @@ export const GamePage: React.FC = observer(() => {
               store.resetGame(randomNum);
               e.currentTarget.blur();
             }}
-            style={{ fontSize: "1rem", fontFamily: "Joystix" }}
+            style={{ fontSize: "1rem" }}
           >
             Restart
           </Button>

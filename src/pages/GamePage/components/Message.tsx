@@ -1,6 +1,6 @@
-import { observer } from 'mobx-react-lite';
-import React from 'react';
-import styled from 'styled-components/macro';
+import { observer } from "mobx-react-lite";
+import React from "react";
+import styled from "styled-components/macro";
 
 export const Message = observer<{ className?: string; text: string }>(
   ({ className, text }) => {
@@ -9,7 +9,6 @@ export const Message = observer<{ className?: string; text: string }>(
 );
 
 const MessageStyled = styled.span`
-  font-family: Joystix;
   font-size: 24px;
   color: yellow;
   position: absolute;
